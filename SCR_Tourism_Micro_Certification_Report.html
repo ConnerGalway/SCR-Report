@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>South Canadian Rockies — Tourism Micro-Certification Report</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,800&family=DM+Mono:wght@400;500&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1815;
+    --ink-soft: #3a342d;
+    --paper: #f4ede1;
+    --paper-warm: #ede2cf;
+    --rust: #b54e2a;
+    --moss: #4a5a3a;
+    --sky: #6b8a9a;
+    --gold: #c89a4a;
+    --line: #2a2520;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 400;
+    line-height: 1.55;
+    overflow-x: hidden;
+    background-image:
+      radial-gradient(ellipse at top right, rgba(200, 154, 74, 0.08), transparent 50%),
+      radial-gradient(ellipse at bottom left, rgba(181, 78, 42, 0.05), transparent 60%);
+  }
+
+  /* Subtle paper grain */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' /%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.35'/%3E%3C/svg%3E");
+    opacity: 0.15;
+    pointer-events: none;
+    z-index: 1;
+    mix-blend-mode: multiply;
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    position: relative;
+    z-index: 2;
+  }
+
+  /* ─── HEADER ─────────────────────────── */
+  header.topbar {
+    border-bottom: 1px solid var(--line);
+    padding: 20px 0;
+    position: relative;
+    z-index: 3;
+  }
+
+  .topbar-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .topbar-inner .left { display: flex; gap: 24px; align-items: center; }
+  .topbar-inner .dot { width: 8px; height: 8px; background: var(--rust); border-radius: 50%; display: inline-block; }
+
+  /* ─── HERO ─────────────────────────── */
+  .hero {
+    padding: 80px 0 60px;
+    position: relative;
+  }
+
+  .hero-eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: '';
+    height: 1px;
+    background: var(--rust);
+    flex: 0 0 60px;
+  }
+  .hero-eyebrow::after { flex: 1; max-width: 200px; }
+
+  .hero h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(48px, 8vw, 104px);
+    line-height: 0.95;
+    letter-spacing: -0.025em;
+    margin-bottom: 24px;
+    font-variation-settings: "opsz" 144;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--rust);
+  }
+
+  .hero-subtitle {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(20px, 2.4vw, 28px);
+    font-weight: 300;
+    font-style: italic;
+    color: var(--ink-soft);
+    max-width: 720px;
+    margin-bottom: 64px;
+    line-height: 1.4;
+  }
+
+  /* Mountain SVG decoration */
+  .hero-mountains {
+    position: absolute;
+    right: -40px;
+    top: 60px;
+    width: 360px;
+    height: 240px;
+    opacity: 0.7;
+    pointer-events: none;
+  }
+
+  /* ─── STAT GRID ─────────────────────────── */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .stat {
+    padding: 32px 24px;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+  .stat:last-child { border-right: none; }
+
+  .stat-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+
+  .stat-value {
+    font-family: 'Fraunces', serif;
+    font-size: 64px;
+    font-weight: 400;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    font-variation-settings: "opsz" 144;
+  }
+
+  .stat-value .suffix {
+    font-size: 18px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--ink-soft);
+    margin-left: 6px;
+    letter-spacing: 0;
+  }
+
+  .stat.accent .stat-value { color: var(--rust); }
+
+  /* ─── SECTION ─────────────────────────── */
+  section.block {
+    padding: 100px 0 40px;
+  }
+
+  .section-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--rust);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label .num {
+    background: var(--rust);
+    color: var(--paper);
+    width: 22px;
+    height: 22px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    font-size: 11px;
+    font-weight: 500;
+  }
+
+  .section-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(36px, 5vw, 56px);
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 48px;
+    max-width: 900px;
+    font-variation-settings: "opsz" 144;
+  }
+
+  .section-title em { font-style: italic; font-weight: 300; color: var(--rust); }
+
+  /* ─── OVERVIEW GRID ─────────────────────────── */
+  .overview-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    border: 1px solid var(--line);
+    background: var(--paper-warm);
+  }
+
+  .overview-item {
+    padding: 32px 28px;
+    border-right: 1px solid var(--line);
+    position: relative;
+  }
+  .overview-item:last-child { border-right: none; }
+
+  .overview-key {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+
+  .overview-value {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: -0.01em;
+  }
+
+  /* ─── MODULES ─────────────────────────── */
+  .module {
+    border-top: 1px solid var(--line);
+    padding: 48px 0;
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 60px;
+    position: relative;
+  }
+
+  .module:last-child { border-bottom: 1px solid var(--line); }
+
+  .module-left { position: relative; }
+
+  .module-num {
+    font-family: 'Fraunces', serif;
+    font-weight: 300;
+    font-size: 88px;
+    line-height: 1;
+    color: var(--rust);
+    font-style: italic;
+    margin-bottom: 16px;
+    font-variation-settings: "opsz" 144;
+  }
+
+  .module-theme {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+
+  .module-title {
+    font-family: 'Fraunces', serif;
+    font-size: 30px;
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    max-width: 360px;
+  }
+
+  .module-right h4 {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .module-right p.lede {
+    font-family: 'Fraunces', serif;
+    font-size: 19px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1.45;
+    color: var(--ink-soft);
+    margin-bottom: 32px;
+    max-width: 640px;
+  }
+
+  .objectives {
+    list-style: none;
+  }
+
+  .objectives li {
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(42, 37, 32, 0.15);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    font-size: 16px;
+    line-height: 1.5;
+    color: var(--ink);
+  }
+
+  .objectives li:last-child { border-bottom: none; }
+
+  .objectives li::before {
+    content: counter(item, decimal-leading-zero);
+    counter-increment: item;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--rust);
+    letter-spacing: 0.08em;
+    flex: 0 0 32px;
+    padding-top: 3px;
+  }
+
+  .objectives { counter-reset: item; }
+
+  /* ─── PARTICIPANTS ─────────────────────────── */
+  .participants-intro {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+    margin-bottom: 56px;
+    align-items: end;
+  }
+
+  .participants-intro p {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--ink-soft);
+    max-width: 640px;
+  }
+
+  .legend {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--ink-soft);
+    padding: 16px 20px;
+    border: 1px solid var(--line);
+    background: var(--paper-warm);
+  }
+
+  .legend-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+  }
+  .legend-row:last-child { margin-bottom: 0; }
+
+  .legend-marker {
+    color: var(--rust);
+    font-weight: 600;
+    font-size: 14px;
+  }
+
+  .participants-list {
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .participant {
+    display: grid;
+    grid-template-columns: 60px 1.2fr 1fr 40px;
+    align-items: center;
+    padding: 18px 0;
+    border-bottom: 1px solid rgba(42, 37, 32, 0.12);
+    transition: background 0.2s ease;
+  }
+
+  .participant:last-child { border-bottom: none; }
+  .participant:hover { background: rgba(200, 154, 74, 0.08); }
+
+  .participant.certified { 
+    background: linear-gradient(to right, rgba(181, 78, 42, 0.04), transparent 80%);
+  }
+
+  .participant.certified:hover { background: rgba(181, 78, 42, 0.08); }
+
+  .participant-num {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--ink-soft);
+    letter-spacing: 0.05em;
+  }
+
+  .participant-name {
+    font-family: 'Fraunces', serif;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  .participant.certified .participant-name { color: var(--rust); }
+
+  .participant-org {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.35;
+  }
+
+  .cert-badge {
+    text-align: right;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: var(--rust);
+  }
+
+  /* ─── DELIVERABLES ─────────────────────────── */
+  .deliverables {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+
+  .deliverable {
+    padding: 36px 28px;
+    border: 1px solid var(--line);
+    background: var(--paper-warm);
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+
+  .deliverable:hover { transform: translateY(-4px); }
+
+  .deliverable-icon {
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--rust);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+    color: var(--rust);
+  }
+
+  .deliverable h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 12px;
+    letter-spacing: -0.01em;
+  }
+
+  .deliverable p {
+    font-size: 14px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+
+  /* ─── FOOTER ─────────────────────────── */
+  footer {
+    margin-top: 120px;
+    border-top: 1px solid var(--line);
+    padding: 40px 0 24px;
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  footer .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 24px;
+  }
+
+  .footer-mark {
+    font-family: 'Fraunces', serif;
+    font-size: 32px;
+    font-weight: 300;
+    font-style: italic;
+    line-height: 1;
+  }
+
+  .footer-meta {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    opacity: 0.7;
+    text-align: right;
+  }
+
+  .footer-meta div { margin-bottom: 4px; }
+
+  /* ─── ENTRANCE ANIMATION ─────────────────────────── */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.8s ease forwards;
+  }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .delay-1 { animation-delay: 0.1s; }
+  .delay-2 { animation-delay: 0.25s; }
+  .delay-3 { animation-delay: 0.4s; }
+  .delay-4 { animation-delay: 0.55s; }
+
+  /* ─── RESPONSIVE ─────────────────────────── */
+  @media (max-width: 900px) {
+    .container { padding: 0 24px; }
+    .hero { padding: 48px 0 32px; }
+    .hero-mountains { display: none; }
+    .stats { grid-template-columns: repeat(2, 1fr); }
+    .stat:nth-child(2) { border-right: none; }
+    .stat:nth-child(1), .stat:nth-child(2) { border-bottom: 1px solid var(--line); }
+    .overview-grid { grid-template-columns: repeat(2, 1fr); }
+    .overview-item:nth-child(2) { border-right: none; }
+    .overview-item:nth-child(1), .overview-item:nth-child(2) { border-bottom: 1px solid var(--line); }
+    .module { grid-template-columns: 1fr; gap: 32px; }
+    .module-num { font-size: 64px; }
+    .deliverables { grid-template-columns: 1fr; }
+    .participants-intro { grid-template-columns: 1fr; gap: 32px; }
+    .participant { grid-template-columns: 30px 1fr; gap: 8px; }
+    .participant-org { grid-column: 2; font-size: 13px; margin-top: 2px; }
+    .cert-badge { display: none; }
+    section.block { padding: 64px 0 24px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="container">
+    <div class="topbar-inner">
+      <div class="left">
+        <span class="dot"></span>
+        <span>Junction Consulting</span>
+      </div>
+      <div>Project Summary &mdash; 2025</div>
+    </div>
+  </div>
+</header>
+
+<!-- ──────────── HERO ──────────── -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow fade-up">South Canadian Rockies &nbsp;·&nbsp; Tourism Ambassador Program</div>
+    <h1 class="fade-up delay-1">Micro-Certification<br><em>Workshop Series</em></h1>
+    <p class="hero-subtitle fade-up delay-2">
+      A four-part live virtual program equipping tourism business owners and operators across the South Canadian Rockies with the tools, stories, and digital fundamentals to become regional ambassadors.
+    </p>
+
+    <svg class="hero-mountains" viewBox="0 0 360 240" xmlns="http://www.w3.org/2000/svg" fill="none">
+      <path d="M0 200 L70 80 L130 140 L200 40 L280 130 L360 90 L360 240 L0 240 Z" fill="#4a5a3a" opacity="0.5"/>
+      <path d="M0 220 L50 150 L110 180 L180 110 L260 170 L330 140 L360 160 L360 240 L0 240 Z" fill="#b54e2a" opacity="0.4"/>
+      <path d="M0 230 L40 200 L90 215 L160 180 L230 210 L300 195 L360 210 L360 240 L0 240 Z" fill="#1a1815" opacity="0.3"/>
+      <circle cx="290" cy="60" r="18" fill="#c89a4a" opacity="0.55"/>
+    </svg>
+  </div>
+
+  <div class="container fade-up delay-3" style="margin-top: 32px;">
+    <div class="stats">
+      <div class="stat">
+        <div class="stat-label">Participants Enrolled</div>
+        <div class="stat-value">31</div>
+      </div>
+      <div class="stat accent">
+        <div class="stat-label">Certificates Issued</div>
+        <div class="stat-value">8</div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Live Sessions</div>
+        <div class="stat-value">4<span class="suffix">× 60 min</span></div>
+      </div>
+      <div class="stat">
+        <div class="stat-label">Region</div>
+        <div class="stat-value" style="font-size: 28px; font-style: italic; font-weight: 300; padding-top: 14px;">SCR</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── OVERVIEW ──────────── -->
+<section class="block">
+  <div class="container">
+    <div class="section-label"><span class="num">1</span> Program Overview</div>
+    <h2 class="section-title">A regional <em>ambassador</em> program designed to elevate the way visitors experience the South Canadian Rockies.</h2>
+
+    <div class="overview-grid">
+      <div class="overview-item">
+        <div class="overview-key">Format</div>
+        <div class="overview-value">4× Live Virtual Sessions <span style="font-weight:300; font-style:italic; color:var(--ink-soft);">(60 min each)</span></div>
+      </div>
+      <div class="overview-item">
+        <div class="overview-key">Audience</div>
+        <div class="overview-value">Business Owners <span style="font-weight:300; font-style:italic; color:var(--ink-soft);">&amp; Operators</span></div>
+      </div>
+      <div class="overview-item">
+        <div class="overview-key">Platform</div>
+        <div class="overview-value">eLearningU <span style="font-weight:300; font-style:italic; color:var(--ink-soft);">(tracking &amp; submissions)</span></div>
+      </div>
+      <div class="overview-item">
+        <div class="overview-key">Facilitator</div>
+        <div class="overview-value">Conner Galway <span style="font-weight:300; font-style:italic; color:var(--ink-soft);">Junction Consulting</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── MODULES ──────────── -->
+<section class="block">
+  <div class="container">
+    <div class="section-label"><span class="num">2</span> Curriculum &amp; Learning Outcomes</div>
+    <h2 class="section-title">Four modules. From <em>setting the stage</em> to telling the story at scale.</h2>
+
+    <!-- MODULE 1 -->
+    <div class="module">
+      <div class="module-left">
+        <div class="module-num">01</div>
+        <div class="module-theme">Setting the Stage &amp; Quick Wins</div>
+        <div class="module-title">The South Canadian Rockies Experience</div>
+      </div>
+      <div class="module-right">
+        <p class="lede">A dual-purpose session that introduces the Tourism Ambassador Program and immediately equips owners with practical data and marketing tools.</p>
+        <h4>Learning Outcomes</h4>
+        <ul class="objectives">
+          <li>Understand the TAP vision and the &ldquo;Ambassador&rdquo; role in the regional tourism economy.</li>
+          <li>Learn simple methods to calculate ROI using guest origin data &mdash; postal codes, zip codes, and origin surveys.</li>
+          <li>Identify quick wins in digital presence: reviews, online listings, and Google Business Profile optimization that drive visitation.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MODULE 2 -->
+    <div class="module">
+      <div class="module-left">
+        <div class="module-num">02</div>
+        <div class="module-theme">Turning Ideas into Revenue</div>
+        <div class="module-title">Developing Market-Ready Products &amp; Experiences</div>
+      </div>
+      <div class="module-right">
+        <p class="lede">Building on each owner&rsquo;s &ldquo;starter concept,&rdquo; this session focuses on packaging, pricing, and collaboration with neighbouring businesses.</p>
+        <h4>Learning Outcomes</h4>
+        <ul class="objectives">
+          <li>Transform a rough concept into a fully bookable, market-ready product.</li>
+          <li>Understand pricing strategies and bundling for sustainable tourism margins.</li>
+          <li>Learn how to collaborate with other local businesses to increase total guest value.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MODULE 3 -->
+    <div class="module">
+      <div class="module-left">
+        <div class="module-num">03</div>
+        <div class="module-theme">Reducing Friction</div>
+        <div class="module-title">Driving Online Bookings &amp; Conversions</div>
+      </div>
+      <div class="module-right">
+        <p class="lede">Once a product exists, this module covers how to actually sell it &mdash; through the website, the booking journey, and email.</p>
+        <h4>Learning Outcomes</h4>
+        <ul class="objectives">
+          <li>Identify and fix barriers to booking on their own websites.</li>
+          <li>Learn to select and work effectively with online booking software.</li>
+          <li>Use email marketing to convert past guests into repeat visitors.</li>
+          <li>Understand the digital customer journey from dreaming to booking.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- MODULE 4 -->
+    <div class="module">
+      <div class="module-left">
+        <div class="module-num">04</div>
+        <div class="module-theme">Storytelling at Scale</div>
+        <div class="module-title">Creating Compelling Social Media</div>
+      </div>
+      <div class="module-right">
+        <p class="lede">Content creation, mobile video, and using AI as an assistant to build a sustainable rhythm that doesn&rsquo;t burn operators out.</p>
+        <h4>Learning Outcomes</h4>
+        <ul class="objectives">
+          <li>Master simple mobile video editing for Instagram Reels and TikTok.</li>
+          <li>Use AI tools to generate captions, ideas, and content instantly.</li>
+          <li>Create a sustainable content calendar that fits a small operator&rsquo;s reality.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── PARTICIPANTS ──────────── -->
+<section class="block">
+  <div class="container">
+    <div class="section-label"><span class="num">3</span> Participant Roster</div>
+    <h2 class="section-title">31 tourism operators from across the region &mdash; 8 fully <em>certified</em> ambassadors.</h2>
+
+    <div class="participants-intro">
+      <p>Operators represent the full breadth of the regional tourism economy: accommodations, restaurants, outdoor adventure, heritage and culture, retail, and destination management.</p>
+      <div class="legend">
+        <div class="legend-row"><span class="legend-marker">★</span> Certificate of Completion issued</div>
+        <div class="legend-row"><span style="color: var(--ink-soft);">○</span> Enrolled participant</div>
+      </div>
+    </div>
+
+    <div class="participants-list" id="participants-list"></div>
+  </div>
+</section>
+
+<!-- ──────────── DELIVERABLES ──────────── -->
+<section class="block">
+  <div class="container">
+    <div class="section-label"><span class="num">4</span> Resources Delivered</div>
+    <h2 class="section-title">Every participant left with a working toolkit.</h2>
+
+    <div class="deliverables">
+      <div class="deliverable">
+        <div class="deliverable-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M8 13h8M8 17h8M8 9h2"/></svg>
+        </div>
+        <h3>Worksheets</h3>
+        <p>Guest Origin Log, Ambassador Story Worksheet, Product One-Sheet, and the Digital Health Checklist &mdash; ready-to-use templates for every business.</p>
+      </div>
+
+      <div class="deliverable">
+        <div class="deliverable-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg>
+        </div>
+        <h3>Session Recordings</h3>
+        <p>Edited recordings of all four live sessions, available on eLearningU for participant review and future reference.</p>
+      </div>
+
+      <div class="deliverable">
+        <div class="deliverable-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="8" r="6"/><path d="m8.21 13.89-1.21 7.11 5-3 5 3-1.21-7.12"/></svg>
+        </div>
+        <h3>Digital Certification</h3>
+        <p>A Micro-Certification of Completion issued upon finishing all homework assignments and the final assessment quiz.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ──────────── FOOTER ──────────── -->
+<footer>
+  <div class="container">
+    <div class="footer-mark">South Canadian Rockies <em style="color: var(--gold);">·</em> Tourism Ambassador Program</div>
+    <div class="footer-meta">
+      <div>Delivered by Junction Consulting</div>
+      <div>Report compiled 2025</div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Participant data — * indicates certificate recipient
+  const participants = [
+    { name: "Brigette Lawson", org: "South Canadian Rockies Tourism Association", certified: false },
+    { name: "Patrick Danger Mitchell", org: "Flint Rock Ranch", certified: false },
+    { name: "Tara Fleming", org: "Great Divide Trail Association", certified: false },
+    { name: "Karey Hovind", org: "Sweet Riders", certified: true },
+    { name: "Adam Tundak", org: "Onemore Restaurant", certified: false },
+    { name: "Anita Beemsterboer", org: "Heritage Acres Farm Museum", certified: true },
+    { name: "Cierra Shortreed", org: "Crowsnest Pass Golf Club", certified: false },
+    { name: "Suzanne Burgman", org: "Crowsnest River Chalets, Lost Lemon Campground & Cabins, Blue Roof Cottage", certified: true },
+    { name: "Paige Sarrasin", org: "Charmed Resorts", certified: false },
+    { name: "Dan Venderbos", org: "UROC — United Riders of Crowsnest", certified: false },
+    { name: "Clive Bradley", org: "Threshold Media Group", certified: false },
+    { name: "Kim Uhersky", org: "Town of Pincher Creek", certified: true },
+    { name: "Melissa Zoller", org: "Glamping Resorts", certified: true },
+    { name: "Natalie Rix", org: "PPK / UROC / Sweet Riders", certified: false },
+    { name: "Fred Bradley", org: "Crowsnest Heritage Initiative Society", certified: false },
+    { name: "Amanda Rees", org: "Pincher Creek & District Chamber of Commerce", certified: false },
+    { name: "Sandi Winter", org: "Heritage Crowsnest", certified: true },
+    { name: "Norj Vanderelst", org: "Colour Infusion & Crowsnest Connect", certified: false },
+    { name: "Melanie Schefter", org: "The Gilded Haus", certified: false },
+    { name: "Lorraine Davis", org: "Tuesdays Bookshop", certified: false },
+    { name: "Cole Fawcett", org: "Castle Mountain Resort", certified: false },
+    { name: "Brent Koinberg", org: "Crowsnest Adventures", certified: true },
+    { name: "Kirsti Dolson", org: "Sinister Sports", certified: false },
+    { name: "Aurora Eggert", org: "The Yurt Experience / Aurora Eggert Coaching", certified: false },
+    { name: "Brandy Fehr", org: "Community Futures Crowsnest Pass", certified: false },
+    { name: "Brian Gallant", org: "Sinister Sports", certified: false },
+    { name: "Marie Everts", org: "Government of Alberta", certified: false },
+    { name: "Danielle Radvak", org: "The Pass Beer Co.", certified: false },
+    { name: "Ariadne Campos", org: "—", certified: true }
+  ];
+
+  // Sort: certified participants first, then alphabetical within each group
+  participants.sort((a, b) => {
+    if (a.certified !== b.certified) return a.certified ? -1 : 1;
+    return a.name.localeCompare(b.name);
+  });
+
+  const list = document.getElementById("participants-list");
+  participants.forEach((p, i) => {
+    const row = document.createElement("div");
+    row.className = "participant" + (p.certified ? " certified" : "");
+    row.innerHTML = `
+      <div class="participant-num">${String(i + 1).padStart(2, "0")}</div>
+      <div class="participant-name">${p.name}${p.certified ? ' <span style="color: var(--gold); font-size: 14px;">★</span>' : ''}</div>
+      <div class="participant-org">${p.org}</div>
+      <div class="cert-badge">${p.certified ? "CERTIFIED" : ""}</div>
+    `;
+    list.appendChild(row);
+  });
+</script>
+
+</body>
+</html>
