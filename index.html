@@ -175,13 +175,15 @@
     margin-bottom:48px;
   }
 
-  .hero-tags { display:flex; flex-wrap:wrap; gap:10px; }
-  .tag {
-    font-family:var(--mono); font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
-    color:rgba(255,255,255,0.82); border:1px solid var(--line-on-navy);
-    padding:7px 14px; border-radius:100px;
+  .hero-meta {
+    display:flex; flex-wrap:wrap; gap:12px 30px;
+    font-family:var(--mono); font-size:12px; letter-spacing:0.1em; text-transform:uppercase;
+    color:rgba(255,255,255,0.74);
   }
-  .tag.solid { background:var(--coral); border-color:var(--coral); color:#fff; }
+  .hero-meta span { display:inline-flex; align-items:center; gap:10px; }
+  .hero-meta span::before {
+    content:''; flex:0 0 auto; width:5px; height:5px; border-radius:50%; background:var(--coral);
+  }
 
   /* SCR logo panel */
   .hero-logo {
@@ -506,11 +508,11 @@
         <div class="hero-eyebrow mono"><span class="ln"></span>Project Summary · 2025</div>
         <h1>Tourism Ambassador<br><em>Micro-Certification</em></h1>
         <p class="hero-sub">A four-part live virtual program equipping tourism business owners and operators across the South Canadian Rockies with the tools, stories, and digital fundamentals to become regional ambassadors.</p>
-        <div class="hero-tags">
-          <span class="tag solid">4 Live Sessions</span>
-          <span class="tag">Workshop Series</span>
-          <span class="tag">Digital Capacity Building</span>
-          <span class="tag">Delivered by Junction</span>
+        <div class="hero-meta">
+          <span>4 Live Sessions</span>
+          <span>Workshop Series</span>
+          <span>Digital Capacity Building</span>
+          <span>Delivered by Junction</span>
         </div>
         <div class="scroll-cue"><span class="bar"></span>Scroll to explore the results</div>
       </div>
@@ -553,7 +555,7 @@
     <div class="impact">
       <div class="impact-head">
         <div class="impact-eyebrow mono"><span class="ln"></span>Program Impact</div>
-        <h3>A <b>31%</b> course completion rate — <span class="mult">2.6×</span> the industry average of 12%.</h3>
+        <h3>A <b>31%</b> course completion rate — <span class="mult">2.6×</span> the industry average.</h3>
       </div>
       <div class="bars">
         <div class="bar-row program">
