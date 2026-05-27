@@ -239,7 +239,7 @@
   /* ─── PROGRAM IMPACT (completion vs industry) ─── */
   .impact {
     border-top:1px solid var(--line-on-navy);
-    padding:54px 36px 6px;
+    padding:54px 36px 64px;
     display:grid; grid-template-columns:1fr 1.15fr; gap:56px; align-items:center;
   }
   .impact-eyebrow { display:inline-flex; align-items:center; gap:12px; color:var(--coral); margin-bottom:20px; }
@@ -454,7 +454,7 @@
     .stats-grid { grid-template-columns:repeat(2,1fr); }
     .stat:nth-child(2) { border-right:none; }
     .stat:nth-child(1),.stat:nth-child(2){ border-bottom:1px solid var(--line-on-navy); }
-    .impact { grid-template-columns:1fr; gap:36px; padding:44px 28px 4px; }
+    .impact { grid-template-columns:1fr; gap:36px; padding:44px 28px 52px; }
     .ov-grid { grid-template-columns:repeat(2,1fr); }
     .deliv { grid-template-columns:1fr; }
     .cta-inner { grid-template-columns:1fr; gap:40px; }
@@ -881,14 +881,6 @@
   }, { rootMargin:"-45% 0px -50% 0px" });
   sections.forEach(s => s && spyObs.observe(s));
 
-  /* ---------- Hide nav on scroll down ---------- */
-  let lastY = 0;
-  const nav = document.getElementById("nav");
-  window.addEventListener("scroll", () => {
-    const y = window.scrollY;
-    nav.style.transform = (y > lastY && y > 200) ? "translateY(-100%)" : "translateY(0)";
-    lastY = y;
-  }, { passive:true });
 </script>
 </body>
 </html>
